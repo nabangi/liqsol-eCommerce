@@ -19,7 +19,7 @@ class Category(models.Model):
         return f'/{self.slug}/'
 
 class Product(models.Model):
-    Category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, related_name='products', on_delete=models.CASCADE)
     name = models.CharField(max_length=255)
     slug = models.SlugField()
     description = models.TextField(blank=True, null=True)
@@ -54,13 +54,13 @@ class Product(models.Model):
             else:
                 return ''
 
-    def make_thumbnail(self, image, size=(300, 200) ):
+    def make_thumbnail(self, image, size=(300, 200)):
         img = Image.open(image)
         img.convert('RGB')
         img.thumbnail(size)
 
         thumb_io =BytesIO()
-        img.save(thumb_io, 'JPEG',quality=85)
+        img.save(thumb_io, 'JPEG', quality=85)
 
         thumbnail = File(thumb_io, name=image.name)
 

@@ -5,12 +5,12 @@ from .models import Category, Product
 class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = {
+        fields = (
             "id",
             "name",
             "get_absolute_url",
             "description",
             "price",
-            "get_mage",
-            "get-thumbnail"
-        }
+            "get_image",
+            "get_thumbnail"
+        )
